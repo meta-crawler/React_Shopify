@@ -8,9 +8,7 @@ import { useStateContext } from '../contexts/ContextProvider';
 const auth = getAuthClient();
 
 const SignIn = () => {
-  const { loggedIn, setLoggedIn, setIsClicked, initialState } = useStateContext();
-
-  const [isSubmitting, setSubmitting] = useState(false);
+  const { setLoggedIn, setIsClicked, initialState } = useStateContext();
 
   const [result, setResult] = useState({
     authenticated: null,
@@ -24,8 +22,7 @@ const SignIn = () => {
   useEffect(() => {
     auth.isLoggedIn().then(() => {
       setLoggedIn(true);
-    }).catch((e) => {
-      // console.log(e);
+    }).catch(() => {
     });
   }, []);
 
@@ -36,22 +33,21 @@ const SignIn = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSubmitting(true);
 
     auth.login(values.name, values.pass)
-    .then((authenticated) => {
-      if (authenticated) {
-        setLoggedIn(true);
-        setResult({ authenticated: true, message: 'Login success' });
-        console.log('logged in');
+      .then((authenticated) => {
+        if (authenticated) {
+          setLoggedIn(true);
+          setResult({ authenticated: true, message: 'Login success' });
+          console.log('logged in');
 
-        setIsClicked(initialState);
-      } else {
-        setLoggedIn(false);
-        setResult({ authenticated: false, message: 'Username and password error' });
-        console.log('Authentication error');
-      }
-    });
+          setIsClicked(initialState);
+        } else {
+          setLoggedIn(false);
+          setResult({ authenticated: false, message: 'There was a problem with the username or password' });
+          console.log('Authentication error');
+        }
+      });
   };
 
   // if (loggedIn) {
@@ -79,7 +75,7 @@ const SignIn = () => {
       <div className="flex justify-between items-center">
         <p className="font-semibold text-lg dark:text-gray-200">Sign in</p>
         <Button
-          icon={<MdOutlineCancel/>}
+          icon={<MdOutlineCancel />}
           color="rgb(153, 171, 180)"
           bgHoverColor="light-gray"
           size="2xl"
@@ -101,7 +97,7 @@ const SignIn = () => {
               placeholder="Username"
               onChange={handleInputChange}
             />
-            <br/>
+            <br />
             <input
               name="pass"
               type="text"
@@ -109,7 +105,7 @@ const SignIn = () => {
               placeholder="Password"
               onChange={handleInputChange}
             />
-            <br/>
+            <br />
             <input
               name="submit"
               type="submit"
@@ -118,7 +114,7 @@ const SignIn = () => {
           </form>
         </div>
       </div>
-      <div className="mt-5"/>
+      <div className="mt-5" />
     </div>
   );
 };

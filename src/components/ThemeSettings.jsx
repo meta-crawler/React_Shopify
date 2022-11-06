@@ -74,8 +74,8 @@ const ThemeSettings = () => {
                     onClick={() => setColor(item.color)}
                   >
                     <BsCheck
-                        className={`ml-2 text-2xl text-white ${item.color === currentColor ? 'block' : 'hidden'}`}
-                      />
+                      className={`ml-2 text-2xl text-white ${item.color === currentColor ? 'block' : 'hidden'}`}
+                    />
                   </button>
                 </div>
               </TooltipComponent>

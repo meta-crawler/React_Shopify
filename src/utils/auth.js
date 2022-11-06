@@ -20,7 +20,7 @@ const refreshPromises = [];
 export function getAuthClient(config = {}) {
   const defaultConfig = {
     // Base URL of your Drupal site.
-    base: 'http://localhost/kuremendocino.com',
+    base: 'https://kuremendocino.com',
     // Name to use when storing the token in localStorage.
     token_name: 'drupal-oauth-token',
     // OAuth client ID - get from Drupal.
@@ -34,6 +34,7 @@ export function getAuthClient(config = {}) {
     expire_margin: 0,
   };
 
+  // eslint-disable-next-line no-param-reassign
   config = { ...defaultConfig, ...config };
 
   /**
@@ -135,6 +136,7 @@ export function getAuthClient(config = {}) {
    * @param {string} url URL to fetch.
    * @param {object} options Options for fetch().
    */
+  // eslint-disable-next-line consistent-return
   async function fetchWithAuthentication(url, options) {
     if (!options.headers.get('Authorization')) {
       const oauthToken = await tokenCurrent();
@@ -168,6 +170,7 @@ export function getAuthClient(config = {}) {
     formData.append('client_secret', config.client_secret);
     formData.append('refresh_token', refreshToken);
 
+    // eslint-disable-next-line no-return-assign
     return (
       refreshPromises[refreshToken] = fetch(`${config.base}/oauth/token`, {
         method: 'post',
@@ -176,21 +179,21 @@ export function getAuthClient(config = {}) {
         }),
         body: formData,
       })
-      .then((response) => response.json())
-      .then((data) => {
-        delete refreshPromises[refreshToken];
+        .then((response) => response.json())
+        .then((data) => {
+          delete refreshPromises[refreshToken];
 
-        if (data.error) {
-          console.log('Error refreshing token', data);
-          return false;
-        }
-        return saveToken(data);
-      })
-      .catch((err) => {
-        delete refreshPromises[refreshToken];
-        console.log('API got an error', err);
-        return Promise.reject(err);
-      })
+          if (data.error) {
+            console.log('Error refreshing token', data);
+            return false;
+          }
+          return saveToken(data);
+        })
+        .catch((err) => {
+          delete refreshPromises[refreshToken];
+          console.log('API got an error', err);
+          return Promise.reject(err);
+        })
     );
   }
 
@@ -216,10 +219,10 @@ export function getAuthClient(config = {}) {
     });
 
     fetchWithAuthentication('/oauth/debug?_format=json', { headers })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log('debug', data);
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('debug', data);
+      });
   }
 
   return { debug, login, logout, isLoggedIn, fetchWithAuthentication, token: tokenCurrent, refreshToken: tokenRefresh };

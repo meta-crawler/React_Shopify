@@ -7,7 +7,6 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import avatar from '../data/avatar.jpg';
-import sunglasses from '../data/icon-emoji-sunglasses.svg';
 import { Cart, Chat, Notification, UserProfile, SignIn } from '.';
 import { useStateContext } from '../contexts/ContextProvider';
 import { getAuthClient } from '../utils/auth';
@@ -51,7 +50,7 @@ const Navbar = () => {
 
     auth.isLoggedIn().then(() => {
       setLoggedIn(true);
-    }).catch((e) => {
+    }).catch(() => {
       // console.log(e);
     });
 
@@ -71,65 +70,65 @@ const Navbar = () => {
   return (
     <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative">
 
-      <NavButton title="Menu" customFunc={handleActiveMenu} color={currentColor} icon={<AiOutlineMenu/>}/>
+      <NavButton title="Menu" customFunc={handleActiveMenu} color={currentColor} icon={<AiOutlineMenu />} />
       <div className="flex">
         <NavButton
           title="Cart"
           customFunc={() => handleClick('cart')}
           color={currentColor}
-          icon={<FiShoppingCart/>}
+          icon={<FiShoppingCart />}
         />
         <NavButton
           title="Chat"
           dotColor="#03C9D7"
           customFunc={() => handleClick('chat')}
           color={currentColor}
-          icon={<BsChatLeft/>}
+          icon={<BsChatLeft />}
         />
         <NavButton
           title="Notification"
           dotColor="rgb(254, 201, 15)"
           customFunc={() => handleClick('notification')}
           color={currentColor}
-          icon={<RiNotification3Line/>}
+          icon={<RiNotification3Line />}
         />
         {loggedIn ? (
-            <TooltipComponent content="Profile" position="BottomCenter">
-              <div
-                className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
-                onClick={() => handleClick('userProfile')}
-              >
-                <img
-                  className="rounded-full w-8 h-8"
-                  src={avatar}
-                  alt="user-profile"
-                />
-                <p>
-                  <span className="text-gray-400 text-14">Hi,</span>{' '}
-                  <span className="text-gray-400 font-bold ml-1 text-14">
+          <TooltipComponent content="Profile" position="BottomCenter">
+            <div
+              className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
+              onClick={() => handleClick('userProfile')}
+            >
+              <img
+                className="rounded-full w-8 h-8"
+                src={avatar}
+                alt="user-profile"
+              />
+              <p>
+                <span className="text-gray-400 text-14">Hi,</span>{' '}
+                <span className="text-gray-400 font-bold ml-1 text-14">
                   Michael
                 </span>
-                </p>
-                <MdKeyboardArrowDown className="text-gray-400 text-14"/>
-              </div>
-            </TooltipComponent>
-          )
+              </p>
+              <MdKeyboardArrowDown className="text-gray-400 text-14" />
+            </div>
+          </TooltipComponent>
+        )
           : (
             <TooltipComponent content="Sign in" position="BottomCenter">
               <NavButton
                 title="Sign in"
                 customFunc={() => handleClick('sign_in')}
                 color={currentColor}
-                icon={<FiLogIn/>}
+                icon={<FiLogIn />}
               />
             </TooltipComponent>
           )}
 
-        {isClicked.cart && (<Cart/>)}
-        {isClicked.chat && (<Chat/>)}
-        {isClicked.notification && (<Notification/>)}
-        {isClicked.userProfile && (<UserProfile/>)}
-        {isClicked.sign_in && (<SignIn/>)}
+        {isClicked.cart && (<Cart />)}
+        {isClicked.chat && (<Chat />)}
+        {isClicked.notification && (<Notification />)}
+        {isClicked.userProfile && (<UserProfile />)}
+        {isClicked.sign_in && (<SignIn />)}
       </div>
     </div>
   );
