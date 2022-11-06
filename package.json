@@ -6,30 +6,38 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.10.12",
-    "@syncfusion/ej2": "^19.4.48",
+    "@syncfusion/ej2": "^20.3.50",
     "@syncfusion/ej2-react-buttons": "^20.3.50",
-    "@syncfusion/ej2-react-calendars": "^19.4.48",
-    "@syncfusion/ej2-react-charts": "^19.4.50",
-    "@syncfusion/ej2-react-dropdowns": "^19.4.52",
-    "@syncfusion/ej2-react-grids": "^19.4.50",
-    "@syncfusion/ej2-react-inputs": "^19.4.52",
-    "@syncfusion/ej2-react-kanban": "^19.4.48",
-    "@syncfusion/ej2-react-popups": "^19.4.52",
-    "@syncfusion/ej2-react-richtexteditor": "^19.4.50",
-    "@syncfusion/ej2-react-schedule": "^19.4.50",
-    "react": "^17.0.2",
+    "@syncfusion/ej2-react-calendars": "^20.3.50",
+    "@syncfusion/ej2-react-charts": "^20.3.50",
+    "@syncfusion/ej2-react-dropdowns": "^20.3.50",
+    "@syncfusion/ej2-react-grids": "^20.3.50",
+    "@syncfusion/ej2-react-inputs": "^20.3.50",
+    "@syncfusion/ej2-react-kanban": "^20.3.49",
+    "@syncfusion/ej2-react-popups": "^20.3.50",
+    "@syncfusion/ej2-react-richtexteditor": "^20.3.50",
+    "@syncfusion/ej2-react-schedule": "^20.3.50",
+    "html-webpack-plugin": "^5.5.0",
+    "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
-    "react-dom": "^17.0.2",
+    "react-dom": "^18.2.0",
     "react-hook-form": "^7.39.1",
-    "react-icons": "^4.3.1",
-    "react-router-dom": "^6.2.1",
-    "react-scripts": "5.0.0"
+    "react-icons": "^4.6.0",
+    "react-router-dom": "^6.4.3",
+    "react-scripts": "5.0.1",
+    "workbox-webpack-plugin": "^6.5.4",
+    "workbox-window": "^6.5.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "webpack-dev-server": "webpack-dev-server",
+    "dev": "webpack serve --mode=development",
+    "prod": "NODE_ENV=production webpack --mode=production",
+    "serve": "npm run prod",
+    "svg": "svgr -d src/components/icons src/components/icons/svgs"
   },
   "eslintConfig": {
     "extends": [
@@ -50,7 +58,11 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
     "autoprefixer": "^10.4.2",
+    "babel-loader": "^9.1.0",
     "eslint": "^8.26.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.25.4",
@@ -58,6 +70,7 @@
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-react-hooks": "^4.3.0",
     "postcss": "^8.4.6",
-    "tailwindcss": "^3.0.19"
+    "tailwindcss": "^3.0.19",
+    "webpack-cli": "^4.10.0"
   }
 }
